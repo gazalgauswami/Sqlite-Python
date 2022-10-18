@@ -1,0 +1,142 @@
+1) Create table temp with one column name dt, insert 5 records and check the type of it in sorted 
+order.
+
+create table temp (dt);
+
+insert into temp(dt) values (1),(5),('gazal'),(89.9),(null);
+
+select dt ,typeof(dt) from temp;
+
+select dt,typeof (Dt) from temp order by dt;
+====================================================
+2) Create example for commit and roll back.
+
+create table emp (eid,ename,city,salary,phno);
+
+begin;
+
+insert into emp values (1,'Meera','Surat',15000,1234567890);
+insert into emp values 
+(2,'Gazal','Vadodra',18000,1234568890);
+insert into emp values 
+(3,'Pawan','Vapi',20000,5534568890);
+
+commit;
+
+select * from emp;
+
+begin;
+
+insert into emp values 
+(4,'Sumita','Tapi',25000,9934568890);
+insert into emp values 
+(5,'Paresh','Rajkot',92000,8834568890);
+
+rollback;
+
+select * from emp;
+
+begin;
+
+insert into emp values 
+(4,'Sumita','Tapi',25000,9934568890);
+insert into emp values 
+(5,'Paresh','Rajkot',92000,8834568890);
+
+commit;
+
+====================================================
+3) Create table tblemp with fields Eid, Fname, Lname, Jdate, Salary, M_id, post.
+
+
+create table tblemp (eid,fname,lname,jdate,salary,m_id,post);
+
+insert into tblemp values (101, 'Hemant', 'Sharma', '1995-01-20', 50000 ,0 ,'Manager' );
+  insert into tblemp values (102, 'Rita', 'Gandhi', '1997-12-20', 45000, 0, 'Manager' );
+  insert into tblemp values (103, 'Maya', 'Mistry', '2001-11-12', 30000 ,101, 'Programmer');
+  insert into tblemp values (104, 'Riya', 'Patel', '2003-09-15', 28000, 102 ,'Programmer' );
+  insert into tblemp values (105, 'Shreya', 'Patel', '2010-10-17', 5000, 101, 'Peon' );
+  insert into tblemp values (106, 'Karan', 'Patel', '2015-08-18', 5000, 102 ,'Peon' );
+  insert into tblemp values (107, 'Reyanshi', 'Vyas', '2011-06-05', 15000, 101, 'Clerk'   );
+  insert into tblemp values (108, 'Mehul','Mehta', '2010-05-06', 17000 ,102, 'Clerk'  );
+  insert into tblemp values (109, 'Krupali', 'Patil',' 2015-04-08', 10000, 101, 'Accountant' );
+  insert into tblemp values (110, 'Maitry', 'Vyas' ,'2017-03-11', 10000, 102, 'Accountant'  );
+  insert into tblemp values (111, 'Mohan', 'Mehta', '2020-02-27', 15000, 101, 'Electrician' );
+
+====================================================
+4) Write a query to display record of id 101.
+
+select * from tblemp where eid=101;
+
+====================================================
+5) Write a query to display only the unique values.
+
+select distinct lname from tblemp;
+====================================================
+6) Write a query to display query salary between 
+10000 and 20000.
+
+select * from tblemp where salary between 10000 and 20000;
+====================================================
+7) Write a query to display lname from 'Patel', 'Mehta','Vyas'.
+
+select * from tblemp where lname in ('Patel','Mehta','Vyas');
+
+====================================================
+8) Write a query to display fname starting with A.
+
+select * from tblemp where fname like 'A%' ;
+====================================================
+9) Write a query to display fname with length 4.
+
+select * from tblemp where fname like '____' ;
+====================================================
+10) Write a query to display top 5 records.
+
+select * from tblemp limit 5;
+====================================================
+11) Write a query to get all employee details from the employee table order by first name in 
+descending order.
+
+select * from tblemp order by fname desc;
+====================================================
+12) Write a query to get the employee ID, fname, lname, salary in ascending order of salary.
+
+select eid,fname,lname,salary from tblemp order by salary;
+
+====================================================
+13) Write a query to get the maximum and minimum salary from employees table.
+
+select max(salary)max,min(salary)min from tblemp;
+====================================================
+14) Write a query to get the average salary and number of employees in the employees table.
+
+select avg(salary)avg_salary,count(eid)no_of_emp from tblemp;
+====================================================
+15) Write a query get all first name from employees table in upper case.
+
+select upper(fname) from tblemp;
+====================================================
+16) Write a query to display the fname, lname and salary for all employees whose salary is not in 
+the range 10,000 through 15,000 and are in M_id 30 or 100.
+
+select fname,lname,salary from tblemp where salary not between 1000 and 15000 or m_id in (103,100);
+
+====================================================
+17) Write a query to display the last names of employees whose names have exactly 6 characters.
+
+select lname from tblemp where fname like '______';
+====================================================
+18) Write a query to display the last names of employees having 'e' as the third character.
+
+select lname from tblemp where fname like '__e%';
+====================================================
+19) Write a query to display the post of Manager and CEO in the employees table.
+
+select * from tblemp where post in('Manager','CEO');
+
+====================================================
+20) Write a query to display the fname of all employees who have both an "a" and "i" in their first 
+name
+
+select fname from tblemp where fname like'%a%' or fname like'%i%';

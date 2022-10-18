@@ -1,0 +1,49 @@
+4.1 create table order1(oid number primary key,pur_amt number,ord_date text,sid number references Salesman (sid));
+
+4.2
+create trigger trg_amount after insert on order1
+for each row
+begin
+select
+case
+when new.pur_amt>1000 then .print('Purchase Amount Is More Than 1000')
+when new.pur_amt<1000 then .print('Purchase Amount Is't More Than 1000')
+else dbms_output.put('Purchase Amount Is 1000')
+end;
+end;
+/
+
+4.3
+insert into order1 values(1,12000,'2020-12-05',5001);
+insert into order1 values(2,42000,'2020-12-20',5002);
+insert into order1 values(3,2000,'2021-02-02',5005);
+insert into order1 values(4,14000,'2021-03-23',5005);
+insert into order1 values(5,23000,'2021-04-15',5003);
+insert into order1 values(6,33000,'2021-05-20',5001);
+insert into order1 values(7,32000,'2021-06-22',5003);
+insert into order1 values(8,23500,'2021-07-01',5003);
+insert into order1 values(9,43000,'2021-07-05',5001);
+insert into order1 values(10,12000,'2021-07-05',5002);
+
+4.5
+select * from order1 order by pur_amt;
+4.6
+select * from order1 limit 5;
+4.7 
+select * from order1 where strftime('%m',ord_date)='12';
+4.8
+select * from order1 where pur_amt between 10000 and 20000;
+4.9
+select name,city,o.* from Salesman s,order1 o where s.sid=o.sid;
+4.10
+select sid,count(pur_amt)as total_purchase from order1 group by sid;
+4.11
+select *,(case when sid in (5001,5002) then 'A' when sid in (5003,5005) then 'B' else 'C' end)as class from order1;
+4.12
+select order1.*,commision  from salesman , order1 where salesman.sid=order1.sid;
+4.13
+
+4.14
+select * from order1 order by ord_date;
+4.15
+select * from order1 where ord_date between e1 and e2;

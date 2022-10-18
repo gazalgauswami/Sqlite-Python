@@ -1,0 +1,38 @@
+//dump data in file
+.open two.db
+create table stud_info(rno, name, gender);
+
+insert into stud_info values(1,'Reet','M'),(2,'Meet','M'), 
+(3,'Geet','F'),(4,'Jeet','M');
+
+create table stud_result(rno, m1,m2,m3);
+
+insert into stud_result values (1,45,65,76),(2,54,66,87),(3,45,56,67),(4,78,89,87);
+//dump whole data
+.output temp.txt
+.dump
+//dump speciphic table data
+.output temp.txt
+.dump stud_info
+
+Select * from stud_result;
+//dump structure of table
+.output temp.txt
+.schema stud_info
+
+mode insert
+.output temp.txt
+Select * from stud_info
+
+//csv file handling
+mode csv
+.import stud.csv stud
+
+.schema stud
+
+Select * from stud;
+
+.mode csv
+.header on
+.output temp.csv
+Select * from stud;
